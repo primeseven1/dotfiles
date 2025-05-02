@@ -15,4 +15,4 @@ pacman -S hyprland hyprlock hyprpaper waybar wl-clipboard wofi \
 	base-devel clang lld nodejs npm lua go \
 	alacritty gtk3 gtk4 qalculate-gtk sdl2-compat sdl3 grim slurp wine wine-mono wine-gecko \
 	vim nvim unzip zip 7zip unrar htop fastfetch qemu-desktop ripgrep gimp vlc obs-studio \
-	firefox
+	firefox corectrl
