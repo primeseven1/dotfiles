@@ -2,7 +2,7 @@
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar at the bottom of your screen
     "height": 24, // Waybar height
-    "output": "DP-1",
+    "output": "DP-3",
     // "width": 1366, // Waybar width
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces"],
