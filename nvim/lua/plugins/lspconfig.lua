@@ -1,32 +1,9 @@
-local function do_mason_config()
-    require("mason").setup()
-end
-
-local function do_mason_lsp_config()
-    require("mason-lspconfig").setup({
-        ensure_installed = {
-            "asm_lsp", "bashls", "clangd", "ts_ls",
-            "lua_ls", "luau_lsp", "pylsp", "rust_analyzer"
-        },
-    })
-end
+local servers = {
+    "asm_lsp", "clangd", "lua_ls", "luau_lsp", "pylsp", "rust_analyzer"
+}
 
 local function do_lsp_config()
-    local lspconfig = require("lspconfig")
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-
-    lspconfig.asm_lsp.setup({ capabilities = capabilities })
-    lspconfig.bashls.setup({ capabilities = capabilities })
-    lspconfig.clangd.setup({
-        capabilities = capabilities,
-        cmd = { "clangd", "--header-insertion=never", "--enable-config" }
-    })
-    lspconfig.ts_ls.setup({ capabilities = capabilities })
-    lspconfig.lua_ls.setup({ capabilities = capabilities })
-    lspconfig.luau_lsp.setup({ capabilities = capabilities })
-    lspconfig.pylsp.setup({
-        capabilities = capabilities,
+    vim.lsp.config("pylsp", {
         settings = {
             pylsp = {
                 plugins = {
@@ -37,17 +14,26 @@ local function do_lsp_config()
             }
         }
     })
-    lspconfig.rust_analyzer.setup({ capabilities = capabilities })
+
+    for _, s in ipairs(servers) do
+        vim.lsp.enable(s)
+    end
 end
 
 return {
     {
         "williamboman/mason.nvim",
-        config = do_mason_config
+        config = function()
+            require("mason").setup()
+        end
     },
     {
         "williamboman/mason-lspconfig.nvim",
-        config = do_mason_lsp_config
+        config = function()
+            require("mason-lspconfig").setup({
+                ensure_installed = servers,
+            })
+        end
     },
     {
         "neovim/nvim-lspconfig",
