@@ -1,5 +1,5 @@
 local function do_treesitter_config()
-    local config = require("nvim-treesitter.configs")
+    local config = require("nvim-treesitter.config")
     config.setup({
         ensure_installed = {
             "asm", "bash", "c", "c_sharp", "cmake", "cpp",
