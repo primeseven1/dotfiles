@@ -24,5 +24,16 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 
+vim.lsp.config('*', {
+    capabilities = {
+        textDocument = {
+            semanticTokens = {
+                multilineTokenSupport = true,
+            }
+        }
+    },
+    root_markers = { '.git' },
+})
+
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
